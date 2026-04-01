@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Tutoring Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px 20px;
+  }
+
+  .poster {
+    width: 800px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    position: relative;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1a1a6e 0%, #0d47a1 45%, #00695c 100%);
+    padding: 50px 50px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,214,0,0.12);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,87,34,0.12);
+  }
+
+  .tagline-pill {
+    display: inline-block;
+    background: #FFD600;
+    color: #1a1a6e;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 10px;
+    position: relative; z-index: 1;
+  }
+  .hero h1 span {
+    color: #FFD600;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 400;
+    margin-bottom: 32px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── BOOK BUTTON ── */
+  .book-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFD600;
+    color: #1a1a6e;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 6px 24px rgba(255,214,0,0.35);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .book-btn:hover {
+    background: #ffe033;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(255,214,0,0.5);
+  }
+  .book-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 4px 14px rgba(255,214,0,0.3);
+  }
+  .book-btn .btn-arrow {
+    display: inline-block;
+    font-size: 18px;
+    transition: transform 0.18s ease;
+  }
+  .book-btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── SCENE: student + tutor ── */
+  .scene-wrap {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    position: relative; z-index: 1;
+    margin-top: 10px;
+  }
+
+  .scene-svg {
+    flex: 1;
+  }
+
+  /* ── QUERY BUBBLE ── */
+  .query-area {
+    flex: 0 0 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-bottom: 10px;
+  }
+
+  .thought-bubble {
+    background: rgba(255,255,255,0.13);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 18px;
+    padding: 16px 20px;
+    position: relative;
+    backdrop-filter: blur(4px);
+  }
+  .thought-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px; left: 28px;
+    width: 14px; height: 14px;
+    background: rgba(255,255,255,0.13);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 50%;
+  }
+
+  .thought-bubble .math-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #FFD600;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .thought-bubble .math-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .solve-bubble {
+    background: #FFD600;
+    border-radius: 18px;
+    padding: 14px 18px;
+    position: relative;
+  }
+  .solve-bubble::before {
+    content: '';
+    position: absolute;
+    top: -10px; right: 30px;
+    width: 12px; height: 12px;
+    background: #FFD600;
+    border-radius: 50%;
+  }
+  .solve-bubble .solve-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a6e;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .solve-bubble .solve-ans {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a6e;
+  }
+
+  /* ── MIDDLE SECTION ── */
+  .mid {
+    background: #fff;
+    padding: 40px 50px 30px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0d47a1;
+    margin-bottom: 18px;
+  }
+
+  .subjects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .subject-card {
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .subject-card.blue {
+    background: #e3f2fd;
+    border-left: 5px solid #1565c0;
+  }
+  .subject-card.teal {
+    background: #e0f2f1;
+    border-left: 5px solid #00695c;
+  }
+  .subject-card.amber {
+    background: #fff8e1;
+    border-left: 5px solid #f9a825;
+  }
+  .subject-card.red {
+    background: #fce4ec;
+    border-left: 5px solid #c62828;
+  }
+
+  .subject-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .subject-card .s-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a6e;
+    display: block;
+  }
+  .subject-card .s-desc {
+    font-size: 12px;
+    color: #555;
+    margin-top: 2px;
+  }
+
+  /* ── HOOK BANNER ── */
+  .hook-banner {
+    background: linear-gradient(90deg, #1a1a6e, #0d47a1);
+    border-radius: 14px;
+    padding: 20px 28px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .hook-banner .hook-emoji {
+    font-size: 36px;
+    flex-shrink: 0;
+  }
+  .hook-banner .hook-text {
+    font-size: 17px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .hook-banner .hook-text strong {
+    color: #FFD600;
+  }
+
+  /* ── BOTTOM: CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, #FFD600 0%, #FFA000 100%);
+    padding: 34px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .cta-left .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a6e;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cta-left .cta-sub {
+    font-size: 13px;
+    color: #3949ab;
+    font-weight: 500;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .contact-clickable {
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 6px 10px;
+    transition: background 0.18s ease, transform 0.15s ease;
+  }
+  .contact-clickable:hover {
+    background: rgba(26,26,110,0.1);
+    transform: translateY(-2px);
+  }
+  .contact-clickable:active {
+    transform: scale(0.97);
+  }
+  .contact-icon {
+    width: 36px; height: 36px;
+    background: #1a1a6e;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .contact-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a6e;
+  }
+  .contact-text span {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #3949ab;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #1a1a6e;
+    padding: 14px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFD600;
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ── TABLET (max 768px) ── */
+  @media (max-width: 768px) {
+    body { padding: 0; background: #fff; }
+
+    .poster {
+      width: 100%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .hero { padding: 32px 24px 28px; }
+
+    .hero h1 { font-size: 38px; }
+
+    .hero-sub { font-size: 15px; margin-bottom: 24px; }
+
+    .book-btn { font-size: 14px; padding: 12px 24px; margin-bottom: 28px; }
+
+    .scene-wrap { flex-direction: column; align-items: center; gap: 16px; }
+
+    .scene-svg { width: 100%; }
+
+    .query-area {
+      flex: unset;
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .thought-bubble, .solve-bubble { flex: 1 1 45%; min-width: 140px; }
+
+    .thought-bubble .math-q { font-size: 18px; }
+    .solve-bubble .solve-ans { font-size: 17px; }
+
+    .mid { padding: 28px 24px 22px; }
+
+    .hook-banner { padding: 16px 18px; gap: 12px; }
+    .hook-banner .hook-emoji { font-size: 26px; }
+    .hook-banner .hook-text { font-size: 14px; }
+
+    .subjects-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+
+    .subject-card { padding: 14px 16px; }
+    .subject-icon { font-size: 24px; }
+    .subject-card .s-title { font-size: 13px; }
+    .subject-card .s-desc { font-size: 11px; }
+
+    .cta-section {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px;
+      gap: 20px;
+    }
+
+    .cta-left .cta-title { font-size: 20px; }
+
+    .contact-info { align-items: flex-start; width: 100%; }
+
+    .footer { padding: 14px 24px; flex-direction: column; gap: 6px; text-align: center; }
+    .footer-copy { font-size: 10px; }
+  }
+
+  /* ── MOBILE (max 480px) ── */
+  @media (max-width: 480px) {
+    .hero { padding: 24px 18px 22px; }
+
+    .tagline-pill { font-size: 10px; padding: 5px 14px; margin-bottom: 16px; }
+
+    .hero h1 { font-size: 30px; margin-bottom: 8px; }
+
+    .hero-sub { font-size: 13px; margin-bottom: 20px; }
+
+    .book-btn { font-size: 13px; padding: 11px 20px; width: 100%; justify-content: center; margin-bottom: 22px; }
+
+    .query-area { flex-direction: column; }
+
+    .thought-bubble, .solve-bubble { flex: unset; width: 100%; }
+
+    .thought-bubble .math-q { font-size: 16px; }
+    .solve-bubble .solve-ans { font-size: 15px; }
+
+    .mid { padding: 22px 18px 18px; }
+
+    .section-label { font-size: 10px; }
+
+    .hook-banner { flex-direction: column; gap: 10px; padding: 14px 16px; }
+    .hook-banner .hook-text { font-size: 13px; }
+
+    .subjects-grid { gap: 10px; }
+
+    .subject-card { padding: 12px 14px; gap: 10px; }
+    .subject-icon { font-size: 20px; }
+    .subject-card .s-title { font-size: 12px; }
+    .subject-card .s-desc { font-size: 10px; }
+
+    .cta-section { padding: 20px 18px; }
+    .cta-left .cta-title { font-size: 18px; }
+    .cta-left .cta-sub { font-size: 12px; }
+
+    .contact-text { font-size: 13px; }
+    .contact-text span { font-size: 10px; }
+    .contact-icon { width: 32px; height: 32px; font-size: 14px; }
+
+    .footer { padding: 12px 18px; }
+    .footer-brand { font-size: 14px; }
+    .footer-copy { font-size: 9px; }
+  }
+
+  /* ── LARGE DESKTOP (min 900px) ── */
+  @media (min-width: 900px) {
+    .poster { width: 800px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="poster">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="tagline-pill">🎓 Expert Home Tutoring</div>
+    <h1>Still Stuck on<br><span>Math?</span></h1>
+    <p class="hero-sub">Don't let confusion hold you back. Get the clarity you need — one session at a time.</p>
+
+    <a href="https://form.jotform.com/260904025753050" target="_blank" rel="noopener noreferrer" class="book-btn">
+      📅 Book Your Session Now <span class="btn-arrow">→</span>
+    </a>
+
+    <div class="scene-wrap">
+      <!-- SVG illustration of student + tutor -->
+      <div class="scene-svg">
+        <svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;">
+          <!-- Desk -->
+          <rect x="30" y="195" width="370" height="12" rx="4" fill="#795548" opacity="0.7"/>
+          <!-- Book on desk -->
+          <rect x="100" y="165" width="90" height="32" rx="4" fill="#1565c0" opacity="0.9"/>
+          <rect x="108" y="171" width="50" height="4" rx="2" fill="#fff" opacity="0.5"/>
+          <rect x="108" y="179" width="38" height="4" rx="2" fill="#fff" opacity="0.5"/>
+          <!-- Pen on desk -->
+          <rect x="210" y="188" width="60" height="6" rx="3" fill="#FFD600" transform="rotate(-10,210,188)"/>
+
+          <!-- STUDENT (left, thoughtful) -->
+          <!-- Body -->
+          <ellipse cx="110" cy="210" rx="42" ry="18" fill="#1976d2" opacity="0.2"/>
+          <rect x="78" y="145" width="64" height="60" rx="16" fill="#1976d2"/>
+          <!-- Collar -->
+          <rect x="99" y="145" width="22" height="14" rx="4" fill="#fff" opacity="0.25"/>
+          <!-- Head -->
+          <circle cx="110" cy="122" r="30" fill="#FFCC80"/>
+          <!-- Hair -->
+          <ellipse cx="110" cy="97" rx="30" ry="12" fill="#5d4037"/>
+          <rect x="82" y="97" width="10" height="18" rx="5" fill="#5d4037"/>
+          <rect x="118" y="97" width="10" height="18" rx="5" fill="#5d4037"/>
+          <!-- Eyes - slightly wide/thoughtful -->
+          <ellipse cx="100" cy="121" rx="6" ry="7" fill="#fff"/>
+          <circle cx="100" cy="122" r="4" fill="#1a237e"/>
+          <circle cx="102" cy="120" r="1.5" fill="#fff"/>
+          <ellipse cx="120" cy="121" rx="6" ry="7" fill="#fff"/>
+          <circle cx="120" cy="122" r="4" fill="#1a237e"/>
+          <circle cx="122" cy="120" r="1.5" fill="#fff"/>
+          <!-- Eyebrows slightly raised (thoughtful) -->
+          <path d="M94 113 Q100 110 106 113" stroke="#5d4037" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M114 113 Q120 110 126 113" stroke="#5d4037" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Relaxed smile -->
+          <path d="M101 133 Q110 140 119 133" stroke="#e64a19" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Cheek blush (relaxed/happy) -->
+          <circle cx="93" cy="130" r="7" fill="#FF8A65" opacity="0.35"/>
+          <circle cx="127" cy="130" r="7" fill="#FF8A65" opacity="0.35"/>
+          <!-- Hand on chin (thinking pose) -->
+          <ellipse cx="110" cy="155" rx="16" ry="8" fill="#FFCC80"/>
+          <path d="M88 155 Q110 170 132 155" fill="#1976d2"/>
+
+          <!-- TUTOR (right, holding pen) -->
+          <!-- Body -->
+          <ellipse cx="290" cy="210" rx="45" ry="18" fill="#1b5e20" opacity="0.2"/>
+          <rect x="258" y="140" width="64" height="65" rx="16" fill="#2e7d32"/>
+          <!-- Shirt collar -->
+          <rect x="278" y="140" width="24" height="16" rx="4" fill="#fff" opacity="0.3"/>
+          <!-- Head -->
+          <circle cx="290" cy="118" r="28" fill="#D7CCC8"/>
+          <!-- Hair -->
+          <ellipse cx="290" cy="95" rx="26" ry="10" fill="#37474f"/>
+          <rect x="263" y="98" width="8" height="14" rx="4" fill="#37474f"/>
+          <rect x="319" y="98" width="8" height="14" rx="4" fill="#37474f"/>
+          <!-- Glasses -->
+          <rect x="274" y="114" width="15" height="10" rx="4" fill="none" stroke="#37474f" stroke-width="2"/>
+          <rect x="293" y="114" width="15" height="10" rx="4" fill="none" stroke="#37474f" stroke-width="2"/>
+          <line x1="289" y1="119" x2="293" y2="119" stroke="#37474f" stroke-width="2"/>
+          <line x1="274" y1="119" x2="270" y2="119" stroke="#37474f" stroke-width="2"/>
+          <line x1="308" y1="119" x2="312" y2="119" stroke="#37474f" stroke-width="2"/>
+          <!-- Eyes behind glasses -->
+          <circle cx="281" cy="119" r="3" fill="#1a237e"/>
+          <circle cx="282.5" cy="117.5" r="1" fill="#fff"/>
+          <circle cx="300" cy="119" r="3" fill="#1a237e"/>
+          <circle cx="301.5" cy="117.5" r="1" fill="#fff"/>
+          <!-- Confident smile -->
+          <path d="M280 129 Q290 136 300 129" stroke="#b71c1c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Arm + hand holding pen -->
+          <path d="M310 170 Q335 165 350 148" stroke="#D7CCC8" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <!-- Pen in hand -->
+          <rect x="342" y="135" width="6" height="30" rx="3" fill="#FFD600" transform="rotate(-35,345,150)"/>
+          <polygon points="342,163 348,163 345,173" fill="#37474f" transform="rotate(-35,345,163)"/>
+
+          <!-- Notebook being written -->
+          <rect x="230" y="168" width="100" height="28" rx="6" fill="#fff" opacity="0.9"/>
+          <text x="241" y="183" font-family="Courier New" font-size="11" fill="#1a1a6e" font-weight="bold">x² + 5x + 6 = 0</text>
+          <text x="241" y="193" font-family="Courier New" font-size="10" fill="#2e7d32">(x+2)(x+3)=0 ✓</text>
+        </svg>
+      </div>
+
+      <!-- Query + Solve bubbles -->
+      <div class="query-area">
+        <div class="thought-bubble">
+          <span class="math-q">∫(x²+3x)dx = ?</span>
+          <span class="math-label">Student's query</span>
+        </div>
+        <div class="solve-bubble">
+          <span class="solve-text">Tutor solves it 🖊️</span>
+          <span class="solve-ans">x³/3 + 3x²/2 + C</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOOK BANNER -->
+  <div class="mid">
+    <div class="hook-banner">
+      <div class="hook-emoji">💡</div>
+      <div class="hook-text">
+        <strong>Are you still worried about your math query?</strong><br>
+        Not able to resolve it on your own? <strong>Book a session with us</strong> — and leave with clarity every single time.
+      </div>
+    </div>
+
+    <!-- SUBJECTS -->
+    <div class="section-label">📚 What We Teach</div>
+    <div class="subjects-grid">
+      <div class="subject-card blue">
+        <div class="subject-icon">🔢</div>
+        <div>
+          <span class="s-title">Primary Mathematics</span>
+          <span class="s-desc">Foundations, numeracy & problem-solving skills</span>
+        </div>
+      </div>
+      <div class="subject-card teal">
+        <div class="subject-icon">📐</div>
+        <div>
+          <span class="s-title">Middle School Maths</span>
+          <span class="s-desc">Algebra, geometry & pre-calculus concepts</span>
+        </div>
+      </div>
+      <div class="subject-card amber">
+        <div class="subject-icon">🏆</div>
+        <div>
+          <span class="s-title">IGCSE Mathematics</span>
+          <span class="s-desc">Full syllabus prep, past papers & exam strategy</span>
+        </div>
+      </div>
+      <div class="subject-card red">
+        <div class="subject-icon">📈</div>
+        <div>
+          <span class="s-title">IGCSE Economics</span>
+          <span class="s-desc">Micro & macro concepts for IGCSE students</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA SECTION -->
+  <div class="cta-section">
+    <div class="cta-left">
+      <span class="cta-title">Book Your Session Today!</span>
+      <span class="cta-sub">One-on-one • Personalised • Results-driven</span>
+    </div>
+
+    <div class="contact-info">
+      <a href="tel:+971568420011" style="text-decoration:none;">
+        <div class="contact-row contact-clickable">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text">
+            +971 56 842 0011
+            <span>Tap to call us directly</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://maps.app.goo.gl/bpd4meRhcpeyUEPb7?g_st=iw" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+        <div class="contact-row contact-clickable">
+          <div class="contact-icon">📍</div>
+          <div class="contact-text">
+            Lulu Residency, Al Nad
+            <span>Tap to open in Google Maps</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="footer-brand">MathMinds Tutoring</span>
+    <span class="footer-copy">Mathematics · IGCSE · Economics · Home Sessions</span>
+  </div>
+
+</div>
+</body>
+</html>
